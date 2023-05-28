@@ -7,26 +7,25 @@ const CustomModal = ({
   children,
   title,
   showOk,
+  setHasDonated,
 }) => {
-  // Modal.confirm({
-  //   cancelButtonProps: { disabled: true, className: "hidden" },
-  // });
   const handleOk = () => {
     setModalActiveFor("");
+    setHasDonated(false);
   };
 
   const handleCancel = () => {
     setModalActiveFor("");
+    setHasDonated(false);
   };
-  console.log(modalActiveFor);
 
   return (
     <>
       <Modal
-        className="w-fit min-w-[300px]"
+        className="w-fit min-w-[300px] min-h-[400px] transition-all"
         width={"fit"}
         title={title}
-        open={modalActiveFor}
+        open={!!modalActiveFor}
         onOk={handleOk}
         okButtonProps={{ className: `bg-primary ${!showOk && "hidden"} ` }}
         cancelButtonProps={{ className: `hidden` }}

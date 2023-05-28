@@ -1,2 +1,4 @@
 export const LEADERBOARD = "LEADERBOARD";
 export const DONATION = "DONATION";
+export const CONGRATULATIONS = "CONGRATULATIONS";
+export const LOADING = "LOADING";

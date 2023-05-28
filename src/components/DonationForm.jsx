@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import RadioButtons from "./RadioButtons";
 import { Button } from "antd";
 
-const DonationForm = ({ setModalActiveFor, modalActiveFor }) => {
+const DonationForm = ({ setIsLoading, setDonatedAmount, setHasDonated }) => {
   const radioData = {
     name: "amount",
     items: [
@@ -10,23 +10,26 @@ const DonationForm = ({ setModalActiveFor, modalActiveFor }) => {
       { id: 0.5, value: 0.5, label: 0.5 },
       { id: 1, value: 1, label: 1 },
       { id: 2, value: 2, label: 2 },
-      { id: 5, value: 5, label: 5 },
+      { id: 3, value: 5, label: 3 },
       { id: 5, value: 5, label: 5 },
     ],
   };
 
-  const handleDonate = (e) => {
-    setModalActiveFor("");
-  };
+  const handleDonate = async (e) => {
+    // set loading to true
+    setIsLoading(true);
+    let response = await new Promise((r) => setTimeout(r, 2000));
+    setIsLoading(false);
 
+    setHasDonated(true);
+  };
   return (
     <div className="mt-[2rem] flex flex-col ">
-      <RadioButtons radioData={radioData} />
+      <RadioButtons radioData={radioData} setDonatedAmount={setDonatedAmount} />
       <Button
-        handleDonate={handleDonate}
-        type="primary"
-        size="large"
-        className="mx-auto bg-primary mt-[2.5rem] w-[100px]">
+        onClick={handleDonate}
+        type="ghost"
+        className="mx-auto bg-primary mt-[2.5rem] w-[130px] h-[50px]  text-white">
         Donate
       </Button>
     </div>

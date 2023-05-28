@@ -12,12 +12,14 @@ const Bottom = ({ modalActiveFor, setModalActiveFor }) => {
   };
   return (
     <div className="">
-      <h3 className="text-2xl">"Donate APt to make the train move faster"</h3>
-      <h2 className="font-bold text-4xl mt-[1rem]">5500</h2>
+      <h3 className="text-2xl md:mt-[1rem]">
+        "Donate APt to make the train move faster"
+      </h3>
+      <h2 className="font-bold text-4xl mt-[3rem]">5500</h2>
       <Button
         onClick={handleDonate}
         type="ghost"
-        className="bg-primary text-white mt-[1rem]  flex mx-auto justify-center items-center w-[15rem] md:w-[20rem] h-[44px] md:h-[50px]">
+        className="bg-primary text-white my-[2.6rem] md:my-[1.9rem]  flex mx-auto justify-center items-center w-[160px] h-[52px] md:w-[200px] lg:w-[270px]  md:h-[50px] lg:h-[60px]">
         DONATE NOW
       </Button>
       <p className="text-xl mt-[1rem]">

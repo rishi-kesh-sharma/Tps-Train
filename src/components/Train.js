@@ -6,7 +6,7 @@ const Train = () => {
       <img
         src={TrainImage}
         alt="image"
-        className="max-h-[200px]  object-contain w-[100%]"
+        className="md:h-[250px]  lg:w-[630px] lg:h-[260px]  object-cover"
       />
     </div>
   );

@@ -8,7 +8,6 @@ import medal4 from "../images/medal4.png";
 import medal5 from "../images/medal5.png";
 
 const medals = [medal1, medal2, medal3, medal4, medal5];
-
 const columns = [
   {
     align: "left",
@@ -95,7 +94,7 @@ const App = () => {
       columns={columns}
       dataSource={data}
       pagination={false}
-      className="w-[500px] "
+      className="w-[500px] mt-[3rem] "
     />
   );
 };

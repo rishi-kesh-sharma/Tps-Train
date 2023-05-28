@@ -2,39 +2,40 @@ import "./App.css";
 import Train from "./components/Train";
 import Bottom from "./components/Bottom";
 import CustomModal from "./components/CustomModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DONATION, LEADERBOARD } from "./constants";
 import LeaderBoardTable from "./components/LeaderBoardTable";
 import DonationForm from "./components/DonationForm";
 import { FaMedal } from "react-icons/fa";
 import Logo from "./images/logo.png";
+import Loading from "./components/Loading";
+import Congratulations from "./components/Congratulations";
 
 function App() {
   const [modalActiveFor, setModalActiveFor] = useState("");
-  console.log(modalActiveFor);
+  const [title, setTitle] = useState("");
+  const [showOk, setShowOk] = useState("");
+  const [hasDonated, setHasDonated] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [donatedAmount, setDonatedAmount] = useState(null);
 
   // title
-  const title =
-    modalActiveFor == DONATION ? (
-      "Choose amount to donate"
-    ) : (
-      <div className="flex gap-[0.3rem] items-center">
-        <FaMedal className="text-[#E8E254]" /> Leaderboard
-      </div>
-    );
+  useEffect(() => {
+    setShowOk(hasDonated);
+    if (hasDonated) {
+      setTitle("Congratulations!!");
+    } else {
+      setTitle("");
+    }
+  }, [hasDonated]);
 
-  // showok
-  const showOk = modalActiveFor == LEADERBOARD && true;
-  // current modal component
-  const currentModalComponent =
-    modalActiveFor == DONATION ? (
-      <DonationForm setModalActiveFor={setModalActiveFor} />
-    ) : (
-      <LeaderBoardTable />
-    );
   return (
-    <div className="App grid grid-cols-1 items-center justify-items-center w-[90%] md:w-[80%] lg:w-[70%] xl:w-[60%] 2xl:w-[50%] py-[2rem] md:py-[3rem] mx-auto">
-      <img src={Logo} alt="logo" className="object-contain  w-[150px]" />
+    <div className="App grid grid-cols-1 items-center justify-items-center w-[90%] md:w-[90%] lg:w-[90%] xl:w-[90%] 2xl:w-[80%] pt-[1rem]  mx-auto max-h-[100vh] overflow-hidden">
+      <img
+        src={Logo}
+        alt="logo"
+        className="object-contain h-[30px] lg:h-[40px]"
+      />
       <Train />
       <Bottom
         modalActiveFor={modalActiveFor}
@@ -43,9 +44,29 @@ function App() {
       <CustomModal
         showOk={showOk}
         modalActiveFor={modalActiveFor}
+        setHasDonated={setHasDonated}
         setModalActiveFor={setModalActiveFor}
         title={title}>
-        {currentModalComponent}
+        {modalActiveFor == DONATION && !hasDonated && !isLoading && (
+          <DonationForm
+            hasDonated={hasDonated}
+            isLoading={isLoading}
+            donatedAmount={donatedAmount}
+            setHasDonated={setHasDonated}
+            setModalActiveFor={setModalActiveFor}
+            setTitle={setTitle}
+            showOk={showOk}
+            setShowOk={setShowOk}
+            setDonatedAmount={setDonatedAmount}
+            setIsLoading={setIsLoading}
+          />
+        )}
+        {modalActiveFor == LEADERBOARD && !hasDonated && !isLoading && (
+          <LeaderBoardTable />
+        )}
+
+        {isLoading && <Loading />}
+        {hasDonated && <Congratulations donatedAmount={donatedAmount} />}
       </CustomModal>
     </div>
   );
