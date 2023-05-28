@@ -2,12 +2,15 @@ import { Button } from "antd";
 import React from "react";
 import { FaMedal } from "react-icons/fa";
 import { DONATION, LEADERBOARD } from "../constants";
+import NumberAnimation from "./NumberAnimation";
 
-const Bottom = ({ modalActiveFor, setModalActiveFor }) => {
+const Bottom = ({ setModalActiveFor, setIsModalOpen }) => {
   const handleDonate = () => {
     setModalActiveFor(DONATION);
+    setIsModalOpen(true);
   };
   const handleLeaderBoard = () => {
+    setIsModalOpen(true);
     setModalActiveFor(LEADERBOARD);
   };
   return (
@@ -15,7 +18,9 @@ const Bottom = ({ modalActiveFor, setModalActiveFor }) => {
       <h3 className="text-2xl md:mt-[1rem]">
         "Donate APt to make the train move faster"
       </h3>
-      <h2 className="font-bold text-4xl mt-[3rem]">5500</h2>
+      <h2 className="font-bold text-4xl mt-[3rem]">
+        <NumberAnimation />
+      </h2>
       <Button
         onClick={handleDonate}
         type="ghost"

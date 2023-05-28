@@ -19,12 +19,12 @@ const DonationForm = ({ setIsLoading, setDonatedAmount, setHasDonated }) => {
     // set loading to true
     setIsLoading(true);
     let response = await new Promise((r) => setTimeout(r, 2000));
-    setIsLoading(false);
 
-    setHasDonated(true);
+    setHasDonated(() => true);
+    setIsLoading(() => false);
   };
   return (
-    <div className="mt-[2rem] flex flex-col ">
+    <div className="mt-[2rem] flex flex-col">
       <RadioButtons radioData={radioData} setDonatedAmount={setDonatedAmount} />
       <Button
         onClick={handleDonate}

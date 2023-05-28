@@ -1,6 +1,5 @@
 import React from "react";
-import { Space, Table, Tag } from "antd";
-import { FaMedal } from "react-icons/fa";
+import { Table } from "antd";
 import medal1 from "../images/medal1.png";
 import medal2 from "../images/medal2.png";
 import medal3 from "../images/medal3.png";
@@ -54,7 +53,7 @@ const data = [
     amount: 2000,
   },
   {
-    key: "1",
+    key: "2",
     rank: 2,
     name: "John Brown",
     times: 32,

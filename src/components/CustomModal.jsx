@@ -1,20 +1,25 @@
-import React from "react";
-import { Button, Modal } from "antd";
+import React, { useEffect } from "react";
+import { Modal } from "antd";
 
 const CustomModal = ({
-  modalActiveFor,
   setModalActiveFor,
+  hasDonated,
   children,
   title,
   showOk,
   setHasDonated,
+  isLoading,
+  isModalOpen,
+  setIsModalOpen,
 }) => {
   const handleOk = () => {
+    setIsModalOpen(false);
     setModalActiveFor("");
     setHasDonated(false);
   };
 
   const handleCancel = () => {
+    setIsModalOpen(false);
     setModalActiveFor("");
     setHasDonated(false);
   };
@@ -22,15 +27,20 @@ const CustomModal = ({
   return (
     <>
       <Modal
-        className="w-fit min-w-[300px] min-h-[400px] transition-all"
+        centered
+        confirmLoading={isLoading}
+        closable={!isLoading && !hasDonated}
+        className={`w-fit min-w-[300px]`}
         width={"fit"}
         title={title}
-        open={!!modalActiveFor}
+        open={isModalOpen}
         onOk={handleOk}
-        okButtonProps={{ className: `bg-primary ${!showOk && "hidden"} ` }}
+        okButtonProps={{
+          className: `bg-primary ${!showOk && "hidden"}`,
+        }}
         cancelButtonProps={{ className: `hidden` }}
         onCancel={handleCancel}>
-        {children}
+        <div className="transition-all">{children}</div>
       </Modal>
     </>
   );
